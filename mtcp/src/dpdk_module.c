@@ -32,6 +32,7 @@
 /* for ip defragging */
 #include <rte_ip_frag.h>
 #endif
+#include <unistd.h>
 /* for ioctl funcs */
 #include <dpdk_iface_common.h>
 /* for Ethernet flow directors */
@@ -77,13 +78,13 @@
 #define TX_HTHRESH			0  /**< Default values of TX host threshold reg. */
 #define TX_WTHRESH			0  /**< Default values of TX write-back threshold reg. */
 
-#define MAX_PKT_BURST			64/*128*/
+#define MAX_PKT_BURST			128/*128*/
 
 /*
  * Configurable number of RX/TX ring descriptors
  */
-#define RTE_TEST_RX_DESC_DEFAULT	128
-#define RTE_TEST_TX_DESC_DEFAULT	128
+#define RTE_TEST_RX_DESC_DEFAULT	2048
+#define RTE_TEST_TX_DESC_DEFAULT	2048
 
 /*
  * Ethernet frame overhead

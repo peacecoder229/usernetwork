@@ -936,7 +936,6 @@ InitializeMTCPManager(struct mtcp_thread_context* ctx)
 		fprintf(stderr, "Failed to allocate mtcp_manager.\n");
 		return NULL;
 	}
-	g_mtcp[ctx->cpu] = mtcp;
 
 	mtcp->tcp_flow_table = CreateHashtable(HashFlow, EqualFlow, NUM_BINS_FLOWS);
 	if (!mtcp->tcp_flow_table) {
@@ -1015,6 +1014,7 @@ InitializeMTCPManager(struct mtcp_thread_context* ctx)
 		return NULL;
 	}
 	TAILQ_INIT(&mtcp->free_smap);
+	fprintf(stderr, "*************MAX CONCURRENCY IS: %u*************\n", CONFIG.max_concurrency);
 	for (i = 0; i < CONFIG.max_concurrency; i++) {
 		mtcp->smap[i].id = i;
 		mtcp->smap[i].socktype = MTCP_SOCK_UNUSED;
@@ -1098,6 +1098,7 @@ InitializeMTCPManager(struct mtcp_thread_context* ctx)
 	TAILQ_INIT(&mtcp->snd_br_list);
 #endif
 
+	g_mtcp[ctx->cpu] = mtcp;
 	return mtcp;
 }
 /*----------------------------------------------------------------------------*/
